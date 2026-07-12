@@ -1,10 +1,10 @@
 # Akashic
 
+[![Akashic Demo](https://img.youtube.com/vi/qsWHhuIwR8c/maxresdefault.jpg)](https://www.youtube.com/watch?v=qsWHhuIwR8c)
+
 <p align="center">
   <strong>Live public-source geospatial intelligence in one operational workspace requiring NO API keys.</strong>
 </p>
-
-[![Akashic Demo](https://img.youtube.com/vi/qsWHhuIwR8c/maxresdefault.jpg)](https://www.youtube.com/watch?v=qsWHhuIwR8c)
 
 <p align="center">
   <img alt="next.js 15" src="https://img.shields.io/badge/next.js-15.5.20-111111?style=flat-square&logo=nextdotjs">
