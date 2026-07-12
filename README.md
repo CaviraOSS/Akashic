@@ -1,6 +1,6 @@
 # Akashic
 
-[![Akashic Demo](https://img.youtube.com/vi/qsWHhuIwR8c/maxresdefault.jpg)](https://www.youtube.com/watch?v=qsWHhuIwR8c)
+[![Akashic Demo](https://github.com/user-attachments/assets/d3065938-0475-4131-b199-2f7546ded0c2)](https://www.youtube.com/watch?v=qsWHhuIwR8c)
 
 <p align="center">
   <strong>Live public-source geospatial intelligence in one operational workspace requiring NO API keys.</strong>
