@@ -1,0 +1,50 @@
+# node dependencies
+node_modules/
+*npm-debug.log*
+*yarn-debug.log*
+*yarn-error.log*
+*pnpm-debug.log*
+
+# next.js, react, builds
+.next/
+out/
+build/
+dist/
+tsconfig.tsbuildinfo
+
+# testing
+coverage/
+
+# env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# os files
+.ds_store
+thumbs.db
+
+# editor directories
+.vscode/
+.idea/
+.blackbox/
+.superpowers/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# public generated assets
+public/airports_new.json
+instructions.md
+/lib/generated/prisma
+tmp
+.worktrees/
+
+# local ai working memory
+docs/ai-context.md
+docs/ai-rules.md
+docs/decisions.md

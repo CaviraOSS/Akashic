@@ -1,0 +1,59 @@
+{
+  "name": "akashic",
+  "version": "0.1.0",
+  "description": "a key-free geospatial intelligence workspace for live public data",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@prisma/client": "5.22.0",
+    "@types/osmtogeojson": "^2.2.34",
+    "cheerio": "^1.2.0",
+    "data-fns": "^1.1.0",
+    "date-fns": "^4.1.0",
+    "deck.gl": "^9.3.3",
+    "fast-xml-parser": "^5.8.0",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.18.0",
+    "maplibre-gl": "^5.24.0",
+    "next": "^15.5.20",
+    "node-fetch": "^3.3.2",
+    "osmtogeojson": "3.0.0-beta.5",
+    "puppeteer": "^25.1.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-draggable": "^4.5.0",
+    "react-markdown": "^10.1.0",
+    "rss-parser": "^3.13.0",
+    "satellite.js": "^6.0.2",
+    "yahoo-finance2": "^3.15.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/natural": "^5.1.5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.20",
+    "postcss": "8.5.17",
+    "prisma": "5.22.0",
+    "strip-comments": "^2.0.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.9.10",
+    "postcss": "$postcss"
+  }
+}

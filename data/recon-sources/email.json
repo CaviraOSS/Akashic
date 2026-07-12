@@ -1,0 +1,3141 @@
+[
+  {
+    "name": "Gravatar",
+    "url": "https://gravatar.com/",
+    "type": "email",
+    "website": "https://gravatar.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "displayName"
+    },
+    "category": "images",
+    "input_operation": "hash.sha256",
+    "api": {
+      "url": "https://gravatar.com/{email}.json",
+      "method": "GET",
+      "parser": {
+        "Avatar": "entry.0.thumbnailUrl",
+        "Name": "entry.0.displayName",
+        "Username": "entry.0.preferredUsername",
+        "About Me": "entry.0.aboutMe",
+        "Location": "entry.0.currentLocation",
+        "Job": "entry.0.job_title",
+        "Company": "entry.0.company",
+        "Contact": "entry.0.contactInfo",
+        "Emails": "entry.0.emails",
+        "Accounts": "entry.0.accounts",
+        "URLs": "entry.0.urls"
+      }
+    },
+    "known": []
+  },
+  {
+    "name": "Adobe",
+    "url": "https://auth.services.adobe.com/",
+    "type": "email",
+    "website": "https://www.adobe.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "authenticationMethods"
+    },
+    "category": "misc",
+    "headers": {
+      "X-Ims-Clientid": "homepage_milo",
+      "Content-Type": "application/json"
+    },
+    "api": {
+      "url": "https://auth.services.adobe.com/signin/v2/users/accounts",
+      "method": "POST",
+      "headers": {
+        "X-Ims-Clientid": "homepage_milo",
+        "Content-Type": "application/json"
+      },
+      "body": "{\"username\":\"{email}\",\"usernameType\":\"EMAIL\"}",
+      "parser": {
+        "Avatar": "0.images.230",
+        "Others": {
+          "Oauth2 Linked": "0.hasT2ELinked",
+          "Status": "0.status.code",
+          "Authentication Methods": "0.authenticationMethods"
+        }
+      }
+    },
+    "known": []
+  },
+  {
+    "name": "Duolingo",
+    "url": "https://www.duolingo.com/",
+    "type": "email",
+    "website": "https://www.duolingo.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "username"
+    },
+    "category": "hobby",
+    "api": {
+      "url": "https://www.duolingo.com/2017-06-30/users?email={email}",
+      "method": "GET",
+      "parser": {
+        "rootPath": "users",
+        "name": "0.name"
+      }
+    },
+    "known": []
+  },
+  {
+    "name": "Chess.com",
+    "url": "https://www.chess.com/",
+    "type": "email",
+    "website": "https://www.chess.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "Email In Use"
+    },
+    "category": "gaming",
+    "api": {
+      "url": "https://www.chess.com/callback/email/available?email={email}",
+      "method": "GET"
+    },
+    "known": []
+  },
+  {
+    "name": "Notion",
+    "url": "https://www.notion.so/",
+    "type": "email",
+    "website": "https://www.notion.so",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"hasAccount\":true"
+    },
+    "category": "misc",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "api": {
+      "url": "https://www.notion.so/api/v3/getLoginOptions",
+      "method": "POST",
+      "body": "{\"email\":\"{email}\"}"
+    },
+    "known": []
+  },
+  {
+    "name": "Spotify",
+    "url": "https://www.spotify.com/",
+    "type": "email",
+    "website": "https://www.spotify.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"status\":20"
+    },
+    "category": "music",
+    "api": {
+      "url": "https://spclient.wg.spotify.com/signup/public/v1/account?validate=1&email={email}",
+      "method": "GET"
+    },
+    "known": []
+  },
+  {
+    "name": "Twitter",
+    "url": "https://twitter.com/",
+    "type": "email",
+    "website": "https://twitter.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"taken\":true"
+    },
+    "category": "music",
+    "api": {
+      "url": "https://api.twitter.com/i/users/email_available.json?email={email}",
+      "method": "GET"
+    },
+    "known": []
+  },
+  {
+    "name": "NetShoes",
+    "url": "https://www.netshoes.com.br/",
+    "type": "email",
+    "website": "https://www.netshoes.com.br",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"exists\":true"
+    },
+    "category": "shopping",
+    "api": {
+      "url": "https://www.netshoes.com.br/auth/account/exists/{email}",
+      "method": "GET"
+    },
+    "known": []
+  },
+  {
+    "name": "OLX",
+    "url": "https://www.olx.com.br/",
+    "type": "email",
+    "website": "https://www.olx.com.br",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "EMAIL"
+    },
+    "category": "shopping",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Olx-Team-Key": "5XzjuCgmYE7qMlYpsLZbTvm98ik4CS4a"
+    },
+    "api": {
+      "url": "https://apigw.olx.com.br/v0/user/login/check_email",
+      "method": "POST",
+      "body": "{\"email\":\"{email}\"}"
+    },
+    "known": []
+  },
+  {
+    "name": "Milanuncios",
+    "url": "https://www.milanuncios.com/",
+    "type": "email",
+    "website": "https://www.milanuncios.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "user-profiles.email-already-exists"
+    },
+    "category": "shopping",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "api": {
+      "url": "https://userprofiles.gw.milanuncios.com/api/v2/users",
+      "method": "POST",
+      "body": "{\"name\":\"SAsASA\",\"password\":\"1234561\",\"email\":\"{email}\",\"isConsentApproved\":\"true\",\"sellerType\":\"PRIVATE\",\"role\":\"USER\"}"
+    },
+    "known": []
+  },
+  {
+    "name": "El Mundo",
+    "url": "https://www.elmundo.es/",
+    "type": "email",
+    "website": "https://www.elmundo.es",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"codigo\":\"176\""
+    },
+    "category": "shopping",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "api": {
+      "url": "https://seguro.elmundo.es/ueregistro/v2/usuarios/registro",
+      "method": "POST",
+      "body": "{\"email\":\"{email}\",\"pass\":\"11\",\"portal\":8,\"aceptaCondicionesLegales\":true,\"aceptaEsMayorDeDieciseis\":true,\"comunicacionesComerciales\":[],\"rid\":null,\"csp\":null,\"urlOrigen\":\"\",\"movil\":\"\",\"aceptaSuscripcionClub\":false,\"pianoTrackingId\":null}"
+    },
+    "known": []
+  },
+  {
+    "name": "Xvideos",
+    "url": "https://www.xvideos.com/",
+    "type": "email",
+    "website": "https://www.xvideos.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"result\":false"
+    },
+    "category": "xx NSFW xx",
+    "api": {
+      "url": "https://www.xvideos.com/account/checkemail?email={email}",
+      "method": "POST",
+      "body": "email={email}"
+    },
+    "known": []
+  },
+  {
+    "name": "Picsart",
+    "url": "https://picsart.com/",
+    "type": "email",
+    "website": "https://picsart.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"response\":[\""
+    },
+    "category": "art",
+    "api": {
+      "url": "https://api.picsart.com/users/email/existence?email_encoded=0&emails={email}",
+      "method": "GET"
+    },
+    "known": []
+  },
+  {
+    "name": "Imageshack",
+    "url": "https://imageshack.com/",
+    "type": "email",
+    "website": "https://imageshack.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"error_code\":30"
+    },
+    "category": "images",
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    },
+    "api": {
+      "url": "https://imageshack.com/rest_api/v2/user",
+      "method": "POST",
+      "body": "email={email}&username=user&password=1&set_cookies=true"
+    },
+    "known": []
+  },
+  {
+    "name": "wordpress",
+    "website": "https://wordpress.com",
+    "type": "email",
+    "api": {
+      "url": "https://public-api.wordpress.com/rest/v1.1/users/{email}/auth-options",
+      "method": "GET"
+    },
+    "detection": {
+      "strategy": "statusCode",
+      "target": 403
+    }
+  },
+  {
+    "name": "axonaut",
+    "website": "https://axonaut.com",
+    "type": "email",
+    "api": {
+      "url": "https://axonaut.com/onboarding/?email={email}",
+      "method": "GET"
+    },
+    "detection": {
+      "strategy": "diffLength"
+    }
+  },
+  {
+    "name": "atlassian",
+    "website": "https://atlassian.com",
+    "type": "email",
+    "api": {
+      "url": "https://id.atlassian.com/login{email}",
+      "method": "GET"
+    },
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    }
+  },
+  {
+    "name": "atlassian",
+    "url": "https://id.atlassian.com/login",
+    "type": "email",
+    "website": "https://id.atlassian.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://id.atlassian.com/login"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://id.atlassian.com/",
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      "Origin": "https://id.atlassian.com",
+      "DNT": "1",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "gravatar",
+    "url": "https://en.gravatar.com/55502f40dc8b7c769880b10874abc9d0.json",
+    "type": "email",
+    "website": "https://en.gravatar.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://en.gravatar.com/55502f40dc8b7c769880b10874abc9d0.json"
+    },
+    "category": "misc"
+  },
+  {
+    "name": "voxmedia",
+    "url": "https://auth.voxmedia.com/chorus_auth/email_valid.json",
+    "type": "email",
+    "website": "https://auth.voxmedia.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://auth.voxmedia.com/chorus_auth/email_valid.json",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1623.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://auth.voxmedia.com/login",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://auth.voxmedia.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "wordpress",
+    "url": "https://public-api.wordpress.com/rest/v1.1/users/{email}/auth-options",
+    "type": "email",
+    "website": "https://public-api.wordpress.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://public-api.wordpress.com/rest/v1.1/users/{email}/auth-options",
+      "data": {
+        "http_envelope": "1",
+        "locale": "fr"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/29.0",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "aboutme",
+    "url": "https://about.me/signup",
+    "type": "email",
+    "website": "https://about.me",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://about.me/signup"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1; rv:21.0) Gecko/20100101 Firefox/21.0"
+    }
+  },
+  {
+    "name": "amocrm",
+    "url": "https://www.amocrm.com/account/check_login.php",
+    "type": "email",
+    "website": "https://amocrm.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.amocrm.com/account/check_login.php",
+      "data": {
+        "LOGIN": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Connection": "keep-alive",
+      "Accept": "*/*",
+      "X-Requested-With": "XMLHttpRequest",
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2309.372 Safari/537.36",
+      "Content-Type": "application/json",
+      "Origin": "https://www.amocrm.com",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Referer": "https://www.amocrm.com/",
+      "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "axonaut",
+    "url": "https://axonaut.com/onboarding/?email={email}",
+    "type": "email",
+    "website": "https://axonaut.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://axonaut.com/onboarding/?email={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "axonaut.com",
+      "upgrade-insecure-requests": "1",
+      "User-Agent": "Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "referer": "https://axonaut.com/en",
+      "accept-language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "hubspot",
+    "url": "https://api.hubspot.com/login-api/v1/login",
+    "type": "email",
+    "website": "https://api.hubspot.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://api.hubspot.com/login-api/v1/login",
+      "data": "{\"email\":\"{email}\",\"password\":\"\",\"rememberLogin\":false}"
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "api.hubspot.com",
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1467.0 Safari/537.36",
+      "content-type": "application/json",
+      "origin": "https://app.hubspot.com",
+      "sec-fetch-site": "same-site",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://app.hubspot.com/",
+      "accept-language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "insightly",
+    "url": "https://accounts.insightly.com/signup/isemailvalid",
+    "type": "email",
+    "website": "https://accounts.insightly.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://accounts.insightly.com/signup/isemailvalid",
+      "data": {
+        "emailaddress": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "accounts.insightly.com",
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "x-requested-with": "XMLHttpRequest",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36",
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "origin": "https://accounts.insightly.com",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://accounts.insightly.com/?plan=trial",
+      "accept-language": "en-US;q=0.8,en;q=0.7",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "nimble",
+    "url": "https://www.nimble.com/lib/register.php?email={email}",
+    "type": "email",
+    "website": "https://nimble.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.nimble.com/lib/register.php?email={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "Connection": "keep-alive",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "X-Requested-With": "XMLHttpRequest",
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.90 Safari/537.36",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Referer": "https://www.nimble.com/",
+      "Accept-Language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "nocrm",
+    "url": "https://register.nocrm.io/register/check_trial_duplicate?email={email}",
+    "type": "email",
+    "website": "https://register.nocrm.io",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://register.nocrm.io/register/check_trial_duplicate?email={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "register.nocrm.io",
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.14 (KHTML, like Gecko) Chrome/24.0.1292.0 Safari/537.14",
+      "x-requested-with": "XMLHttpRequest",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://register.nocrm.io/?lang=en&cc=FR&edition=dreamteam&site_version=v3-video-sun-fr&first_seen_from=https%3A%2F%2Fyoudontneedacrm.com%2Ffr&first_seen_on=%2Ffr&fp_tracking=",
+      "accept-language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "nutshell",
+    "url": "https://app.nutshell.com/auth",
+    "type": "email",
+    "website": "https://app.nutshell.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://app.nutshell.com/auth",
+      "data": {
+        "via": "database",
+        "timezone_offset": "1",
+        "remember_me": "true",
+        "username": "{email}",
+        "invalidToken": "false",
+        "password": "a"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "app.nutshell.com",
+      "accept": "*/*",
+      "User-Agent": "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36",
+      "content-type": "application/x-www-form-urlencoded",
+      "origin": "https://app.nutshell.com",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://app.nutshell.com/auth",
+      "accept-language": "en-US;q=0.8,en;q=0.7",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "pipedrive",
+    "url": "https://app.pipedrive.com/signup-service/start",
+    "type": "email",
+    "website": "https://app.pipedrive.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://app.pipedrive.com/signup-service/start",
+      "data": "{\"email\":\"{email}\",\"language\":\"fr\",\"country_code\":\"fr\",\"selectedTier\":null,\"packages\":[]}"
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "app.pipedrive.com",
+      "accept": "application/json",
+      "User-Agent": "Mozilla/5.0 (X11; NetBSD) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36",
+      "content-type": "application/json",
+      "origin": "https://www.pipedrive.com",
+      "sec-fetch-site": "same-site",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://www.pipedrive.com/",
+      "accept-language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "teamleader",
+    "url": "https://focus.teamleader.eu/app/emails/availability",
+    "type": "email",
+    "website": "https://focus.teamleader.eu",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://focus.teamleader.eu/app/emails/availability",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "focus.teamleader.eu",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
+      "content-type": "application/json",
+      "accept": "*/*",
+      "origin": "https://signup.focus.teamleader.fr",
+      "sec-fetch-site": "cross-site",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://signup.focus.teamleader.fr/",
+      "accept-language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "zoho",
+    "url": "https://accounts.zoho.com/register",
+    "type": "email",
+    "website": "https://accounts.zoho.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://accounts.zoho.com/register"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/4E423F",
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      "Accept": "*/*",
+      "Origin": "https://accounts.zoho.com",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Accept-Language": "en-US;q=0.8,en;q=0.7"
+    }
+  },
+  {
+    "name": "buymeacoffee",
+    "url": "https://www.buymeacoffee.com/",
+    "type": "email",
+    "website": "https://buymeacoffee.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.buymeacoffee.com/"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.buymeacoffee.com",
+      "DNT": "1",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "babeshows",
+    "url": "https://www.babeshows.co.uk/member.php",
+    "type": "email",
+    "website": "https://babeshows.co.uk",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.babeshows.co.uk/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1464.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.babeshows.co.uk/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://www.babeshows.co.uk",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "badeggsonline",
+    "url": "https://www.badeggsonline.com/beo2-forum/member.php",
+    "type": "email",
+    "website": "https://badeggsonline.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.badeggsonline.com/beo2-forum/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.badeggsonline.com/beo2-forum/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://www.badeggsonline.com/beo2-forum",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "biosmods",
+    "url": "https://bios-mods.com/forum/member.php",
+    "type": "email",
+    "website": "https://bios-mods.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://bios-mods.com/forum/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://bios-mods.com/forum/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://bios-mods.com/forum/",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "biotechnologyforums",
+    "url": "https://biotechnologyforums.com/member.php",
+    "type": "email",
+    "website": "https://biotechnologyforums.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://biotechnologyforums.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://biotechnologyforums.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://biotechnologyforums.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "blackworldforum",
+    "url": "http://blackworldforum.com/member.php",
+    "type": "email",
+    "website": "https://blackworldforum.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "http://blackworldforum.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1467.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "http://blackworldforum.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "http://blackworldforum.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "blitzortung",
+    "url": "https://forum.blitzortung.org/member.php",
+    "type": "email",
+    "website": "https://forum.blitzortung.org",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://forum.blitzortung.org/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.2 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://forum.blitzortung.org/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://forum.blitzortung.org",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "bluegrassrivals",
+    "url": "http://bluegrassrivals.com/forum/member.php",
+    "type": "email",
+    "website": "https://bluegrassrivals.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "http://bluegrassrivals.com/forum/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "http://bluegrassrivals.com/forum/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "http://bluegrassrivals.com/forum",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "cambridgemt",
+    "url": "https://discussion.cambridge-mt.com/member.php",
+    "type": "email",
+    "website": "https://discussion.cambridge-mt.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://discussion.cambridge-mt.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://discussion.cambridge-mt.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://discussion.cambridge-mt.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "chinaphonearena",
+    "url": "https://www.chinaphonearena.com/forum/member.php",
+    "type": "email",
+    "website": "https://chinaphonearena.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.chinaphonearena.com/forum/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.chinaphonearena.com/forum/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://www.chinaphonearena.com/forum",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "clashfarmer",
+    "url": "https://www.clashfarmer.com/forum/member.php",
+    "type": "email",
+    "website": "https://clashfarmer.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.clashfarmer.com/forum/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.clashfarmer.com/forum/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://www.clashfarmer.com/forum",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "codeigniter",
+    "url": "https://forum.codeigniter.com/member.php",
+    "type": "email",
+    "website": "https://forum.codeigniter.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://forum.codeigniter.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.15 (KHTML, like Gecko) Chrome/24.0.1295.0 Safari/537.15",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://forum.codeigniter.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://forum.codeigniter.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "cpaelites",
+    "url": "https://www.cpaelites.com/member.php",
+    "type": "email",
+    "website": "https://cpaelites.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.cpaelites.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.cpaelites.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://www.cpaelites.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "cpahero",
+    "url": "https://www.cpahero.com/member.php",
+    "type": "email",
+    "website": "https://cpahero.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.cpahero.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/4E423F",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.cpahero.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://www.cpahero.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "cracked_to",
+    "url": "https://cracked.to/member.php",
+    "type": "email",
+    "website": "https://cracked.to",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://cracked.to/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.17 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://cracked.to/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://cracked.to",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "demonforums",
+    "url": "https://demonforums.net/member.php",
+    "type": "email",
+    "website": "https://demonforums.net",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://demonforums.net/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://demonforums.net/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://demonforums.net",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "freiberg",
+    "url": "https://drachenhort.user.stunet.tu-freiberg.de/member.php",
+    "type": "email",
+    "website": "https://drachenhort.user.stunet.tu-freiberg.de",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://drachenhort.user.stunet.tu-freiberg.de/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.60 Safari/537.17",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://drachenhort.user.stunet.tu-freiberg.de/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://drachenhort.user.stunet.tu-freiberg.de",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "koditv",
+    "url": "https://forum.kodi.tv/member.php",
+    "type": "email",
+    "website": "https://forum.kodi.tv",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://forum.kodi.tv/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://forum.kodi.tv/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://forum.kodi.tv",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "mybb",
+    "url": "https://community.mybb.com/member.php",
+    "type": "email",
+    "website": "https://community.mybb.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://community.mybb.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1464.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://community.mybb.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://community.mybb.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "nattyornot",
+    "url": "https://nattyornotforum.nattyornot.com/member.php",
+    "type": "email",
+    "website": "https://nattyornotforum.nattyornot.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://nattyornotforum.nattyornot.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://nattyornotforum.nattyornot.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://nattyornotforum.nattyornot.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "ndemiccreations",
+    "url": "https://forum.ndemiccreations.com/member.php",
+    "type": "email",
+    "website": "https://forum.ndemiccreations.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://forum.ndemiccreations.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1664.3 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://forum.ndemiccreations.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://forum.ndemiccreations.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "nextpvr",
+    "url": "https://forums.nextpvr.com/member.php",
+    "type": "email",
+    "website": "https://forums.nextpvr.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://forums.nextpvr.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://forums.nextpvr.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://forums.nextpvr.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "onlinesequencer",
+    "url": "https://onlinesequencer.net/forum/member.php",
+    "type": "email",
+    "website": "https://onlinesequencer.net",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://onlinesequencer.net/forum/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1944.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://onlinesequencer.net/forum/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://onlinesequencer.net/forum",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "thecardboard",
+    "url": "https://thecardboard.org/board/member.php",
+    "type": "email",
+    "website": "https://thecardboard.org",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://thecardboard.org/board/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://thecardboard.org/board/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://thecardboard.org/board",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "therianguide",
+    "url": "https://forums.therian-guide.com/member.php",
+    "type": "email",
+    "website": "https://forums.therian-guide.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://forums.therian-guide.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://forums.therian-guide.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://forums.therian-guide.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "thevapingforum",
+    "url": "http://www.thevapingforum.com/member.php",
+    "type": "email",
+    "website": "https://thevapingforum.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "http://www.thevapingforum.com/member.php"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "http://www.thevapingforum.com/member.php",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "http://www.thevapingforum.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "coroflot",
+    "url": "https://www.coroflot.com/home/signup_email_check",
+    "type": "email",
+    "website": "https://coroflot.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.coroflot.com/home/signup_email_check",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Linux i686; rv:21.0) Gecko/20100101 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.coroflot.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Referer": "https://www.coroflot.com/signup",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "freelancer",
+    "url": "https://www.freelancer.com/api/users/0.1/users/check?compact=true&new_errors=true",
+    "type": "email",
+    "website": "https://freelancer.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.freelancer.com/api/users/0.1/users/check?compact=true&new_errors=true",
+      "data": "{\"user\":{\"email\":\"{email}\"}}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0)  Gecko/20100101 Firefox/18.0",
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/json",
+      "Origin": "https://www.freelancer.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "seoclerks",
+    "url": "https://www.seoclerks.com",
+    "type": "email",
+    "website": "https://seoclerks.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.seoclerks.com"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20100101 Firefox/19.0",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.seoclerks.com",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "diigo",
+    "url": "https://www.diigo.com/user_mana2/check_email",
+    "type": "email",
+    "website": "https://diigo.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.diigo.com/user_mana2/check_email",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; rv:21.0) Gecko/20130326 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Referer": "https://www.diigo.com/sign-up?plan=free",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "quora",
+    "url": "https://fr.quora.com",
+    "type": "email",
+    "website": "https://fr.quora.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://fr.quora.com"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://fr.quora.com",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "google",
+    "url": "https://accounts.google.com/signup/v2/webcreateaccount?continue=https%3A%2F%2Faccounts.google.com%2FManageAccount%3Fnc%3D1&gmb=exp&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp",
+    "type": "email",
+    "website": "https://accounts.google.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://accounts.google.com/signup/v2/webcreateaccount?continue=https%3A%2F%2Faccounts.google.com%2FManageAccount%3Fnc%3D1&gmb=exp&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1; rv:21.0) Gecko/20130401 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "X-Same-Domain": "1",
+      "Google-Accounts-XSRF": "1",
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      "Origin": "https://accounts.google.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Referer": "https://accounts.google.com/signup/v2/webcreateaccount?continue=https%3A%2F%2Faccounts.google.com%2F&gmb=exp&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "laposte",
+    "url": "https://www.laposte.fr/authentification",
+    "type": "email",
+    "website": "https://laposte.fr",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.laposte.fr/authentification",
+      "data": {
+        "email": "{email}",
+        "customerId": "",
+        "tunnelSteps": ""
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Origin": "https://www.laposte.fr",
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2309.372 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      "Referer": "https://www.laposte.fr/authentification",
+      "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "mail_ru",
+    "url": "https://account.mail.ru/api/v1/user/password/restore",
+    "type": "email",
+    "website": "https://account.mail.ru",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://account.mail.ru/api/v1/user/password/restore",
+      "data": "email={email}&htmlencoded=false"
+    },
+    "category": "misc",
+    "headers": {
+      "authority": "account.mail.ru",
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "x-requested-with": "XMLHttpRequest",
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "origin": "https://account.mail.ru",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "https://account.mail.ru/recovery?email={email}",
+      "user-agent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2226.0 Safari/537.36",
+      "accept-language": "ru"
+    }
+  },
+  {
+    "name": "protonmail",
+    "url": "https://api.protonmail.ch/pks/lookup?op=index&search={email}",
+    "type": "email",
+    "website": "https://api.protonmail.ch",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://api.protonmail.ch/pks/lookup?op=index&search={email}"
+    },
+    "category": "misc"
+  },
+  {
+    "name": "yahoo",
+    "url": "https://login.yahoo.com",
+    "type": "email",
+    "website": "https://login.yahoo.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://login.yahoo.com"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0",
+      "Accept": "*/*",
+      "Accept-Language": "en-US,en;q=0.5",
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Origin": "https://login.yahoo.com",
+      "DNT": "1",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "ello",
+    "url": "https://ello.co/api/v2/availability",
+    "type": "email",
+    "website": "https://ello.co",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://ello.co/api/v2/availability",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0)  Gecko/20100101 Firefox/18.0",
+      "Accept": "application/json",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://ello.co/join",
+      "Content-Type": "application/json",
+      "Origin": "https://ello.co",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "flickr",
+    "url": "https://identity-api.flickr.com/migration?email={email}",
+    "type": "email",
+    "website": "https://identity-api.flickr.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://identity-api.flickr.com/migration?email={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Referer": "https://identity.flickr.com/login",
+      "Origin": "https://identity.flickr.com",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "komoot",
+    "url": "https://account.komoot.com/v1/signin",
+    "type": "email",
+    "website": "https://account.komoot.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://account.komoot.com/v1/signin",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0.1) Gecko/20121011 Firefox/21.0.1",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/json",
+      "Origin": "https://account.komoot.com",
+      "Connection": "keep-alive",
+      "Referer": "https://account.komoot.com/signin"
+    }
+  },
+  {
+    "name": "rambler",
+    "url": "https://id.rambler.ru/jsonrpc",
+    "type": "email",
+    "website": "https://id.rambler.ru",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://id.rambler.ru/jsonrpc",
+      "data": "{\"method\":\"Rambler::Id::get_email_account_info\",\"params\":[{\"email\":\"{email}\"}],\"rpc\":\"2.0\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20120101 Firefox/29.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://id.rambler.ru/champ/registration",
+      "Content-Type": "application/json",
+      "Origin": "https://id.rambler.ru",
+      "DNT": "1",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "sporcle",
+    "url": "https://www.sporcle.com/auth/ajax/verify.php",
+    "type": "email",
+    "website": "https://sporcle.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.sporcle.com/auth/ajax/verify.php",
+      "data": {
+        "email": "{email}",
+        "password1": "",
+        "password2": "",
+        "handle": "",
+        "humancheck": "",
+        "reg_path": "main_header_join",
+        "ref_page": "",
+        "querystring": ""
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:22.0) Gecko/20130328 Firefox/22.0",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.sporcle.com",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "caringbridge",
+    "url": "https://www.caringbridge.org/signin",
+    "type": "email",
+    "website": "https://caringbridge.org",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.caringbridge.org/signin",
+      "data": {
+        "csrf": "",
+        "email": "{email}",
+        "password_placeholder": "",
+        "submit-btn": "Continue"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.90 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Content-Type": "application/json",
+      "Origin": "https://www.caringbridge.org",
+      "Connection": "keep-alive",
+      "Referer": "https://www.caringbridge.org/signin",
+      "Sec-GPC": "1",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "sevencups",
+    "url": "https://www.7cups.com/listener/CreateAccount.php",
+    "type": "email",
+    "website": "https://7cups.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.7cups.com/listener/CreateAccount.php",
+      "data": "-----------------------------\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n{email}\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"passwd\"\r\n\r\n\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"dobMonth\"\r\n\r\n12\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"dobDay\"\r\n\r\n11\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"dobYear\"\r\n\r\n2010\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"orgPass\"\r\n\r\n\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"data-request-datatype\"\r\n\r\njson\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"submit-value\"\r\n\r\nnull\r\n-------------------------------\r\n"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; NetBSD) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Host": "www.7cups.com",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.7cups.com",
+      "Accept-Encoding": "gzip, late, br",
+      "Referer": "https://www.7cups.com/listener/CreateAccount.php",
+      "TE": "Trailers",
+      "Content-Type": "multipart/form-data; boundary=---------------------------"
+    }
+  },
+  {
+    "name": "blip",
+    "url": "https://blip.fm/signup/save",
+    "type": "email",
+    "website": "https://blip.fm",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://blip.fm/signup/save",
+      "data": {
+        "referringUrl": "",
+        "genpass": "1",
+        "signup[urlName]": "test",
+        "signup[emailAddress]": "{email}",
+        "g-recaptcha-response": "",
+        "tos": "0"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Origin": "https://blip.fm",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Referer": "https://blip.fm/",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "lastfm",
+    "url": "https://www.last.fm/join/partial/validate",
+    "type": "email",
+    "website": "https://last.fm",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.last.fm/join/partial/validate",
+      "data": {
+        "csrfmiddlewaretoken": "MOCK_TOKEN",
+        "userName": "",
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Accept": "*/*",
+      "Referer": "https://www.last.fm/join",
+      "X-Requested-With": "XMLHttpRequest",
+      "Cookie": "csrftoken=MOCK_TOKEN",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "smule",
+    "url": "https://www.smule.com/user/check_email",
+    "type": "email",
+    "website": "https://smule.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.smule.com/user/check_email"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1; rv:21.0) Gecko/20130331 Firefox/21.0",
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Origin": "https://www.smule.com",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "soundcloud",
+    "url": "https://soundcloud.com/octobersveryown",
+    "type": "email",
+    "website": "https://soundcloud.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://soundcloud.com/octobersveryown"
+    },
+    "category": "misc",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_5 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G36"
+    }
+  },
+  {
+    "name": "spotify",
+    "url": "https://spclient.wg.spotify.com/signup/public/v1/account",
+    "type": "email",
+    "website": "https://spclient.wg.spotify.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://spclient.wg.spotify.com/signup/public/v1/account",
+      "data": {
+        "validate": "1",
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.60 Safari/537.17",
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Language": "en-US,en;q=0.5",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "tunefind",
+    "url": "https://www.tunefind.com/user/join",
+    "type": "email",
+    "website": "https://tunefind.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.tunefind.com/user/join",
+      "data": "$-----------------------------\r\nContent-Disposition: form-data; name=\"username\"\r\n\r\n\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n{email}\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n\r\n-------------------------------\r\n"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1; rv:21.0) Gecko/20130331 Firefox/21.0",
+      "Referer": "https://www.tunefind.com/",
+      "x-tf-react": "true",
+      "Origin": "https://www.tunefind.com",
+      "Connection": "keep-alive",
+      "Content-Type": "multipart/form-data; boundary=---------------------------"
+    }
+  },
+  {
+    "name": "rocketreach",
+    "url": "https://rocketreach.co/v1/validateEmail?email_address={email}",
+    "type": "email",
+    "website": "https://rocketreach.co",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://rocketreach.co/v1/validateEmail?email_address={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0",
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://rocketreach.co/signup",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "x-csrftoken": "MOCK_TOKEN"
+    }
+  },
+  {
+    "name": "venmo",
+    "url": "https://venmo.com/signup/email",
+    "type": "email",
+    "website": "https://venmo.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://venmo.com/signup/email"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64;) Gecko/20100101 Firefox/20.0",
+      "Accept": "application/json",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://venmo.com/",
+      "Content-Type": "application/json",
+      "Origin": "https://venmo.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "pornhub",
+    "url": "https://www.pornhub.com/signup",
+    "type": "email",
+    "website": "https://pornhub.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.pornhub.com/signup"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en,en-US;q=0.5",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Upgrade-Insecure-Requests": "1"
+    }
+  },
+  {
+    "name": "redtube",
+    "url": "https://www.redtube.com/user/create_account_check",
+    "type": "email",
+    "website": "https://redtube.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.redtube.com/user/create_account_check",
+      "data": {
+        "token": "MOCK_TOKEN",
+        "redirect": "",
+        "check_what": "email",
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/json",
+      "Origin": "https://redtube.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "xnxx",
+    "url": "https://www.xnxx.com/account/checkemail?email={email}",
+    "type": "email",
+    "website": "https://xnxx.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.xnxx.com/account/checkemail?email={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "fr-fr",
+      "Host": "www.xnxx.com",
+      "User-Agent": "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25",
+      "Referer": "https://www.xnxx.com/video-holehe/palenath_fucks_xnxx_with_holehe",
+      "Connection": "keep-alive",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  },
+  {
+    "name": "anydo",
+    "url": "https://sm-prod2.any.do/check_email",
+    "type": "email",
+    "website": "https://sm-prod2.any.do",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://sm-prod2.any.do/check_email",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.17 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://desktop.any.do/",
+      "Content-Type": "application/json; charset=UTF-8",
+      "X-Platform": "3",
+      "Origin": "https://desktop.any.do",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "evernote",
+    "url": "https://www.evernote.com/Login.action",
+    "type": "email",
+    "website": "https://evernote.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.evernote.com/Login.action"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Microsoft Windows NT 6.2.9200.0); rv:22.0) Gecko/20130405 Firefox/22.0",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.evernote.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Referer": "https://www.evernote.com/Login.action",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "eventbrite",
+    "url": "https://www.eventbrite.com/api/v3/users/lookup/",
+    "type": "email",
+    "website": "https://eventbrite.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.eventbrite.com/api/v3/users/lookup/",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:22.0) Gecko/20130328 Firefox/22.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.eventbrite.com/",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.eventbrite.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "X-CSRFToken": "MOCK_TOKEN"
+    }
+  },
+  {
+    "name": "nike",
+    "url": "https://unite.nike.com/account/email/v1",
+    "type": "email",
+    "website": "https://unite.nike.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://unite.nike.com/account/email/v1",
+      "data": "{\"emailAddress\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:21.0) Gecko/20130331 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Content-Type": "text/plain;charset=UTF-8",
+      "Origin": "https://www.nike.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Referer": "https://www.nike.com/",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "samsung",
+    "url": "https://account.samsung.com/accounts/v1/Samsung_com_FR/signUp",
+    "type": "email",
+    "website": "https://account.samsung.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://account.samsung.com/accounts/v1/Samsung_com_FR/signUp"
+    },
+    "category": "misc"
+  },
+  {
+    "name": "codecademy",
+    "url": "https://www.codecademy.com/register?redirect=%2F",
+    "type": "email",
+    "website": "https://codecademy.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.codecademy.com/register?redirect=%2F"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
+      "Accept": "application/json",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.codecademy.com/register?redirect=%2",
+      "Content-Type": "application/json",
+      "Origin": "https://www.codecademy.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "codepen",
+    "url": "https://codepen.io/accounts/signup/user/free",
+    "type": "email",
+    "website": "https://codepen.io",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://codepen.io/accounts/signup/user/free"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://codepen.io/accounts/signup/user/free",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://codepen.io",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "devrant",
+    "url": "https://devrant.com/api/users",
+    "type": "email",
+    "website": "https://devrant.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://devrant.com/api/users",
+      "data": {
+        "app": "3",
+        "type": "1",
+        "email": "{email}",
+        "username": "",
+        "password": "",
+        "guid": "",
+        "plat": "3",
+        "sid": "",
+        "seid": ""
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://devrant.com",
+      "Connection": "keep-alive",
+      "Referer": "https://devrant.com/feed/top/month?login=1"
+    }
+  },
+  {
+    "name": "replit",
+    "url": "https://replit.com/data/user/exists",
+    "type": "email",
+    "website": "https://replit.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://replit.com/data/user/exists",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:17.0) Gecko/20100101 Firefox/17.0.6",
+      "Accept": "application/json",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "content-type": "application/json",
+      "x-requested-with": "XMLHttpRequest",
+      "Origin": "https://replit.com",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "teamtreehouse",
+    "url": "https://teamtreehouse.com/subscribe/new?trial=yes",
+    "type": "email",
+    "website": "https://teamtreehouse.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://teamtreehouse.com/subscribe/new?trial=yes"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://teamtreehouse.com/subscribe/new?trial=yes",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://teamtreehouse.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "vrbo",
+    "url": "https://www.vrbo.com/auth/aam/v3/status",
+    "type": "email",
+    "website": "https://vrbo.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.vrbo.com/auth/aam/v3/status",
+      "data": "{\"emailAddress\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64;) Gecko/20100101 Firefox/20.0",
+      "Accept": "*/*",
+      "Accept-Language": "en-US,en;q=0.5",
+      "Content-Type": "application/json",
+      "x-homeaway-site": "vrbo",
+      "Origin": "https://www.vrbo.com",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "amazon",
+    "url": "https://www.amazon.com/ap/signin/",
+    "type": "email",
+    "website": "https://amazon.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.amazon.com/ap/signin/",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "patreon",
+    "url": "https://www.patreon.com/api/email/available",
+    "type": "email",
+    "website": "https://patreon.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.patreon.com/api/email/available",
+      "data": "{\"data\":{\"attributes\":{\"email\":\"{email}\"},\"relationships\":{}}}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.patreon.com/signup?ru=%2Fcreate%3Fru%3D%252Feurope",
+      "Content-Type": "application/vnd.api+json",
+      "Origin": "https://www.patreon.com",
+      "DNT": "1",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "pinterest",
+    "url": "https://www.pinterest.com/_ngjs/resource/EmailExistsResource/get/",
+    "type": "email",
+    "website": "https://pinterest.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.pinterest.com/_ngjs/resource/EmailExistsResource/get/",
+      "data": {
+        "source_url": "/",
+        "data": "{\"options\": {\"email\": \"test@example.com\"}, \"context\": {}}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "plurk",
+    "url": "https://www.plurk.com/Users/isEmailFound",
+    "type": "email",
+    "website": "https://plurk.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.plurk.com/Users/isEmailFound",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20130330 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "Origin": "https://www.plurk.com",
+      "DNT": "1",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "strava",
+    "url": "https://www.strava.com/athletes/email_unique",
+    "type": "email",
+    "website": "https://strava.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.strava.com/athletes/email_unique",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://www.strava.com/register/free?cta=sign-up&element=button&source=website_show",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "X-CSRF-Token": "MOCK_TOKEN",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "taringa",
+    "url": "https://www.taringa.net/api/auth/availability/email",
+    "type": "email",
+    "website": "https://taringa.net",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://www.taringa.net/api/auth/availability/email",
+      "data": "{\"email\":\"{email}\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.60 Safari/537.17",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Content-Type": "application/json; charset=utf-8",
+      "Origin": "https://www.taringa.net",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "tellonym",
+    "url": "https://api.tellonym.me/accounts/check",
+    "type": "email",
+    "website": "https://api.tellonym.me",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://api.tellonym.me/accounts/check",
+      "data": {
+        "email": "{email}",
+        "errorMessage": "",
+        "limit": "25"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20130331 Firefox/21.0",
+      "Accept": "application/json",
+      "Accept-Language": "en,en-US;q=0.5",
+      "tellonym-client": "web:0.51.1",
+      "content-type": "application/json;charset=utf-8",
+      "Origin": "https://tellonym.me",
+      "Connection": "keep-alive",
+      "Referer": "https://tellonym.me/register/email",
+      "TE": "Trailers",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "tumblr",
+    "url": "https://www.tumblr.com/",
+    "type": "email",
+    "website": "https://tumblr.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.tumblr.com/"
+    },
+    "category": "misc",
+    "headers": {
+      "Host": "www.tumblr.com",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "fr-FR,fr;q=0.9",
+      "Connection": "keep-alive",
+      "Accept-Encoding": "gzip, deflate, br",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+    }
+  },
+  {
+    "name": "twitter",
+    "url": "https://api.twitter.com/i/users/email_available.json",
+    "type": "email",
+    "website": "https://api.twitter.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://api.twitter.com/i/users/email_available.json",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "vsco",
+    "url": "https://api.vsco.co/2.0/users/email?email={email}",
+    "type": "email",
+    "website": "https://api.vsco.co",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://api.vsco.co/2.0/users/email?email={email}"
+    },
+    "category": "misc",
+    "headers": {
+      "Authorization": "Bearer 7356455548d0a1d886db010883388d08be84d0c9"
+    }
+  },
+  {
+    "name": "wattpad",
+    "url": "https://www.wattpad.com/api/v3/users/validate",
+    "type": "email",
+    "website": "https://wattpad.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.wattpad.com/api/v3/users/validate",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:21.0) Gecko/20100101 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3",
+      "Connection": "keep-alive",
+      "Referer": "https://www.wattpad.com/",
+      "TE": "Trailers",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "xing",
+    "url": "https://www.xing.com/start/signup?registration=1",
+    "type": "email",
+    "website": "https://xing.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.xing.com/start/signup?registration=1"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en,en-US;q=0.5",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Upgrade-Insecure-Requests": "1"
+    }
+  },
+  {
+    "name": "archive",
+    "url": "https://archive.org/account/signup",
+    "type": "email",
+    "website": "https://archive.org",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://archive.org/account/signup",
+      "data": "-----------------------------\r\nContent-Disposition: form-data; name=\"input_name\"\r\n\r\nusername\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"input_value\"\r\n\r\n{email}\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"input_validator\"\r\n\r\ntrue\r\n-----------------------------\r\nContent-Disposition: form-data; name=\"submit_by_js\"\r\n\r\ntrue\r\n-------------------------------\r\n"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.90 Safari/537.36",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Content-Type": "multipart/form-data; boundary=---------------------------",
+      "Origin": "https://archive.org",
+      "Connection": "keep-alive",
+      "Referer": "https://archive.org/account/signup",
+      "Sec-GPC": "1",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "docker",
+    "url": "https://hub.docker.com/v2/users/signup/",
+    "type": "email",
+    "website": "https://hub.docker.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://hub.docker.com/v2/users/signup/",
+      "data": "{\"email\":\"{email}\",\"password\":\"\",\"recaptcha_response\":\"\",\"redirect_value\":\"\",\"subscribe\":true,\"username\":\"\"}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36",
+      "Accept": "application/json",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://hub.docker.com/signup",
+      "Content-Type": "application/json",
+      "X-CSRFToken": "",
+      "Origin": "https://hub.docker.com",
+      "DNT": "1",
+      "Connection": "keep-alive"
+    }
+  },
+  {
+    "name": "firefox",
+    "url": "https://api.accounts.firefox.com/v1/account/status",
+    "type": "email",
+    "website": "https://api.accounts.firefox.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "POST",
+      "url": "https://api.accounts.firefox.com/v1/account/status",
+      "data": {
+        "email": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "issuu",
+    "url": "https://issuu.com/call/signup/check-email/{email}",
+    "type": "email",
+    "website": "https://issuu.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://issuu.com/call/signup/check-email/{email}"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.2; rv:21.0) Gecko/20130326 Firefox/21.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://issuu.com/signup?returnUrl=https%3A%2F%2Fissuu.com%2F&issuu_product=header&issuu_subproduct=anon_home&issuu_context=signin&issuu_cta=log_up",
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "lastpass",
+    "url": "https://lastpass.com/create_account.php",
+    "type": "email",
+    "website": "https://lastpass.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://lastpass.com/create_account.php",
+      "data": {
+        "check": "avail",
+        "skipcontent": "1",
+        "mistype": "1",
+        "username": "{email}"
+      }
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0",
+      "Accept": "*/*",
+      "Accept-Language": "en,en-US;q=0.5",
+      "Referer": "https://lastpass.com/",
+      "X-Requested-With": "XMLHttpRequest",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers",
+      "Content-Type": "application/json"
+    }
+  },
+  {
+    "name": "office365",
+    "url": "https://outlook.office365.com/autodiscover/autodiscover.json/v1.0/698853627096872579923299150450@example.com?Protocol=Autodiscoverv1",
+    "type": "email",
+    "website": "https://outlook.office365.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://outlook.office365.com/autodiscover/autodiscover.json/v1.0/698853627096872579923299150450@example.com?Protocol=Autodiscoverv1"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Microsoft Office/16.0 (Windows NT 10.0; Microsoft Outlook 16.0.12026; Pro)",
+      "Accept": "application/json"
+    }
+  },
+  {
+    "name": "blablacar",
+    "url": "https://www.blablacar.fr/register",
+    "type": "email",
+    "website": "https://blablacar.fr",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "api": {
+      "method": "GET",
+      "url": "https://www.blablacar.fr/register"
+    },
+    "category": "misc",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (X11; Linux i686; rv:21.0) Gecko/20100101 Firefox/21.0",
+      "Accept": "application/json",
+      "Accept-Language": "fr_FR",
+      "Referer": "https://www.blablacar.fr/",
+      "Content-Type": "application/json",
+      "x-locale": "fr_FR",
+      "x-currency": "EUR",
+      "x-client": "SPA|1.0.0",
+      "x-forwarded-proto": "https",
+      "Origin": "https://www.blablacar.fr",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "TE": "Trailers"
+    }
+  },
+  {
+    "name": "Instagram (Recovery)",
+    "url": "https://www.instagram.com/accounts/account_recovery_send_ajax/",
+    "type": "email",
+    "website": "https://www.instagram.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "email_sent"
+    },
+    "category": "social",
+    "api": {
+      "method": "POST",
+      "url": "https://www.instagram.com/accounts/account_recovery_send_ajax/",
+      "data": {
+        "email_or_username": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  },
+  {
+    "name": "Spotify (Recovery)",
+    "url": "https://www.spotify.com/api/password-reset/",
+    "type": "email",
+    "website": "https://www.spotify.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "\"success\":true"
+    },
+    "category": "music",
+    "api": {
+      "method": "POST",
+      "url": "https://www.spotify.com/api/password-reset/",
+      "data": {
+        "email": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  },
+  {
+    "name": "Pinterest (Recovery)",
+    "url": "https://www.pinterest.com/resource/UserResetPasswordResource/create/",
+    "type": "email",
+    "website": "https://www.pinterest.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "An email with instructions"
+    },
+    "category": "social",
+    "api": {
+      "method": "POST",
+      "url": "https://www.pinterest.com/resource/UserResetPasswordResource/create/",
+      "data": {
+        "data": "{\"options\":{\"username_or_email\":\"{email}\"}}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  },
+  {
+    "name": "Tumblr (Recovery)",
+    "url": "https://www.tumblr.com/svc/account/register",
+    "type": "email",
+    "website": "https://www.tumblr.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 200
+    },
+    "category": "social",
+    "api": {
+      "method": "POST",
+      "url": "https://www.tumblr.com/svc/account/forgot_password",
+      "data": {
+        "email": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "Snapchat (Recovery)",
+    "url": "https://accounts.snapchat.com/accounts/password_reset_request",
+    "type": "email",
+    "website": "https://www.snapchat.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "A link to reset your password"
+    },
+    "category": "social",
+    "api": {
+      "method": "POST",
+      "url": "https://accounts.snapchat.com/accounts/password_reset_request",
+      "data": {
+        "email": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  },
+  {
+    "name": "Discord (Recovery)",
+    "url": "https://discord.com/api/v9/auth/forgot",
+    "type": "email",
+    "website": "https://discord.com",
+    "detection": {
+      "strategy": "statusCode",
+      "target": 204
+    },
+    "category": "social",
+    "api": {
+      "method": "POST",
+      "url": "https://discord.com/api/v9/auth/forgot",
+      "data": {
+        "login": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "GitHub (Recovery)",
+    "url": "https://github.com/password_reset",
+    "type": "email",
+    "website": "https://github.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "Check your email"
+    },
+    "category": "tech",
+    "api": {
+      "method": "POST",
+      "url": "https://github.com/password_reset",
+      "data": {
+        "login_field": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  },
+  {
+    "name": "Dropbox (Recovery)",
+    "url": "https://www.dropbox.com/forgot_password",
+    "type": "email",
+    "website": "https://www.dropbox.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "email sent"
+    },
+    "category": "tech",
+    "api": {
+      "method": "POST",
+      "url": "https://www.dropbox.com/forgot_password",
+      "data": {
+        "email": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  },
+  {
+    "name": "Netflix (Recovery)",
+    "url": "https://www.netflix.com/ForgotPasswords",
+    "type": "email",
+    "website": "https://www.netflix.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "Email sent"
+    },
+    "category": "entertainment",
+    "api": {
+      "method": "POST",
+      "url": "https://www.netflix.com/api/shakti/m/account/forgotpassword",
+      "data": {
+        "email": "{email}",
+        "forgotPasswordMode": "email"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "Reddit (Recovery)",
+    "url": "https://www.reddit.com/api/password_reset",
+    "type": "email",
+    "website": "https://www.reddit.com",
+    "detection": {
+      "strategy": "textPositiveMatch",
+      "target": "email sent"
+    },
+    "category": "social",
+    "api": {
+      "method": "POST",
+      "url": "https://www.reddit.com/password_reset",
+      "data": {
+        "email": "{email}"
+      },
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  }
+]
