@@ -4,6 +4,8 @@
   <strong>Live public-source geospatial intelligence in one operational workspace requiring NO API keys.</strong>
 </p>
 
+<img width="full" height="auto" alt="akashic" src="./.github/demo.mp4" />
+
 <p align="center">
   <img alt="next.js 15" src="https://img.shields.io/badge/next.js-15.5.20-111111?style=flat-square&logo=nextdotjs">
   <img alt="typescript" src="https://img.shields.io/badge/typescript-5-3178c6?style=flat-square&logo=typescript&logoColor=white">
