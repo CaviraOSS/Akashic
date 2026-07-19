@@ -12,8 +12,9 @@
   <img alt="deck.gl" src="https://img.shields.io/badge/deck.gl-live_map-ea4335?style=flat-square">
   <img alt="no api keys" src="https://img.shields.io/badge/api_keys-none_required-20b486?style=flat-square">
   <img alt="agpl v3" src="https://img.shields.io/badge/license-agpl_v3-663399?style=flat-square">
-  [![Discord](https://img.shields.io/discord/1300368230320697404?label=Discord)](https://discord.gg/93M9XSuEj6)
 </p>
+
+  [![Discord](https://img.shields.io/discord/1300368230320697404?label=Discord)](https://discord.gg/P7HaRayqTh)
 
 Akashic is a self-hosted intelligence workspace that brings aircraft, satellites, earthquakes, weather, public radio, infrastructure, country intelligence, public cameras, and open-source reconnaissance onto a single interactive map.
 
