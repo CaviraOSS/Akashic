@@ -16,6 +16,13 @@
 
   [![Discord](https://img.shields.io/discord/1300368230320697404?label=Discord)](https://discord.gg/P7HaRayqTh)
 
+# 🚀 **We’re actively accepting volunteers!**
+
+We’re looking for **developers, social media volunteers, designers, content creators, community helpers, and more.** If you’d like to contribute and be part of what we’re building, we’d love to have you!
+
+📩 **Interested?** Reach out at **[nullure@cavira.app](mailto:nullure@cavira.app)**
+
+
 Akashic is a self-hosted intelligence workspace that brings aircraft, satellites, earthquakes, weather, public radio, infrastructure, country intelligence, public cameras, and open-source reconnaissance onto a single interactive map.
 
 it is built for exploration and correlation, not passive dashboard watching. layers can be combined, entities can be inspected in place, and the intelligence deck keeps live events and strategic context visible without replacing the map.
