@@ -11,7 +11,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test lib/geo/basemaps.test.mjs"
   },
   "dependencies": {
     "@prisma/client": "5.22.0",

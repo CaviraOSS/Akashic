@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
+import { matchNotable } from "@/lib/aviation/notable-aircraft";
 
 
 
@@ -17,13 +18,13 @@ export async function GET(request: Request, context: { params: Promise<{ icao24:
         fetch(`https://api.planespotters.net/pub/photos/hex/${hex}`, { headers: hdrs }),
         fetch(`https://api.airplanes.live/v2/hex/${hex}`, { headers: hdrs, cache: "no-store" }),
     ]);
-    
+
     let acDb: any = null;
     if (acRes.status === "fulfilled" && acRes.value?.ok) {
         const d = await acRes.value.json();
         acDb = d?.response?.aircraft || null;
     }
-    
+
     let origin: string | null = null;
     let originName: string | null = null;
     let destination: string | null = null;
@@ -38,7 +39,7 @@ export async function GET(request: Request, context: { params: Promise<{ icao24:
             destName = fr.destination?.name || fr.destination?.municipality || null;
         }
     }
-    
+
     let recentHistory: { callsign: string; origin: string; originName: string; destination: string; destName: string }[] = [];
     if (histRes.status === "fulfilled" && histRes.value?.ok) {
         const d = await histRes.value.json();
@@ -64,26 +65,29 @@ export async function GET(request: Request, context: { params: Promise<{ icao24:
             photoLink = img.link || null;
         }
     }
-    
+
     let liveAc: any = {};
     if (liveRes.status === "fulfilled" && liveRes.value?.ok) {
         const d = await liveRes.value.json();
         if (d?.ac?.length > 0) liveAc = d.ac[0];
     }
+    const registration = acDb?.n_number || liveAc.r || "UNREG";
+    const notable = matchNotable(hex, registration, callsign);
     return NextResponse.json({
         icao24: hex.toUpperCase(),
         callsign: callsign || liveAc.flight?.trim() || "UNKNOWN",
         operator: acDb?.registered_owner || liveAc.ownOp || "Unknown Operator",
         model: acDb?.type || liveAc.desc || liveAc.t || "Unknown",
         description: acDb ? `${acDb.manufacturer || ""} ${acDb.type || ""}`.trim() : (liveAc.desc || null),
-        registration: acDb?.n_number || liveAc.r || "UNREG",
+        registration,
+        notable,
         squawk: liveAc.squawk || null,
         category: "COMMERCIAL",
-        
+
         origin, originName, destination, destName,
-        
+
         photoUrl, photographer, photoLink,
-        
+
         oat: liveAc.oat ?? null,
         tat: liveAc.tat ?? null,
         mach: liveAc.mach ?? null,

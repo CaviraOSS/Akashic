@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { TacticalFlight } from "@/components/map/MapGlobe";
 import { formatDistanceToNow } from "date-fns";
+import FlightBlueprintModal from "@/components/modals/FlightBlueprintModal";
 
 interface DetailedFlightData {
     callsign: string;
@@ -28,12 +29,14 @@ interface DetailedFlightData {
     windSpd: number | null;
     navAlt: number | null;
     recentHistory: { callsign: string; origin: string; originName: string; destination: string; destName: string; }[];
+    notable?: { person: string; note: string; category: string; confidence: "confirmed" | "reported" } | null;
 }
 
 export default function FlightDetailsSidebar({ flight, onClose }: { flight: TacticalFlight | null; onClose: () => void; }) {
     const [details, setDetails] = useState<DetailedFlightData | null>(null);
     const [loading, setLoading] = useState(false);
     const [showHistory, setShowHistory] = useState(false);
+    const [showBlueprint, setShowBlueprint] = useState(false);
 
     useEffect(() => {
         if (!flight) { setDetails(null); return; }
@@ -109,6 +112,19 @@ export default function FlightDetailsSidebar({ flight, onClose }: { flight: Tact
                 </div>
                 <button onClick={onClose} className="absolute right-2.5 top-2.5 bg-transparent border-none text-m3-on-surface-variant cursor-pointer text-xs p-1 hover:text-m3-on-surface">✕</button>
             </div>
+
+            { }
+            {details?.notable && (
+                <div className="px-3.5 py-2.5 border-b border-amber-500/40 bg-gradient-to-r from-amber-500/15 to-amber-400/5">
+                    <div className="flex items-center gap-1.5 mb-1">
+                        <span className="text-amber-300 text-[0.7rem]">⭐</span>
+                        <span className="text-[0.52rem] font-bold text-amber-300 uppercase tracking-[0.16em]">Notable Aircraft</span>
+                        <span className={`ml-auto text-[0.44rem] font-bold uppercase px-1.5 py-0.5 rounded-tag border ${details.notable.confidence === "confirmed" ? "border-emerald-500/50 text-emerald-300 bg-emerald-900/20" : "border-amber-500/40 text-amber-300/90 bg-amber-900/10"}`}>{details.notable.confidence}</span>
+                    </div>
+                    <div className="text-[0.8rem] font-bold text-amber-100 leading-tight">{details.notable.person}</div>
+                    <div className="text-[0.55rem] font-mono text-amber-200/70 mt-0.5">{details.notable.note}</div>
+                </div>
+            )}
 
             { }
             {details?.photoUrl && (
@@ -187,6 +203,21 @@ export default function FlightDetailsSidebar({ flight, onClose }: { flight: Tact
                     </>
                 ) : null}
             </div>
+
+            { }
+            <div className="px-3.5 pb-3.5 pt-1">
+                <button
+                    onClick={() => setShowBlueprint(true)}
+                    className="w-full rounded-lg border border-sky-500/30 bg-sky-500/10 px-4 py-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-sky-300 transition-colors hover:bg-sky-500/20"
+                >
+                    More Details
+                </button>
+            </div>
+
+            {showBlueprint && (
+                <FlightBlueprintModal flight={flight} details={details} onClose={() => setShowBlueprint(false)} />
+            )}
+
             <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }`}</style>
         </div>
     );
